@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Team', href: '#team' },
-  { name: 'Methodology', href: '#methodology' },
-  { name: 'Career', href: '#career' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Team", href: "/team" },
+  { name: "Methodology", href: "/methodology" },
+  { name: "Projects", href: "/projects" },
+  { name: "Career", href: "/career" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const Navbar = () => {

@@ -1,13 +1,12 @@
-import { Navbar } from '@/components/Layout/Navbar';
-import { Footer } from '@/components/Layout/Footer';
-import { HeroSection } from '@/components/Sections/HeroSection';
-import { TechnologySection } from '@/components/Sections/TechnologySection';
-import { AboutSection } from '@/components/Sections/AboutSection';
-import { ProjectsSection } from '@/components/Sections/ProjectsSection';
-import { TeamSection } from '@/components/Sections/TeamSection';
-import { MethodologySection } from '@/components/Sections/MethodologySection';
-import { CareerSection } from '@/components/Sections/CareerSection';
-import { ContactSection } from '@/components/Sections/ContactSection';
+import HeroSection from '@/components/Sections/HeroSection';
+import TechnologySection from '@/components/Sections/TechnologySection';
+import ContactSection from '@/components/Sections/ContactSection';
+import Navbar from '@/components/Layout/Navbar';
+import Footer from '@/components/Layout/Footer';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle, Users, Target, Award } from 'lucide-react';
 
 const Index = () => {
   return (

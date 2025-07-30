@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
 import { Quote } from 'lucide-react';
 
 const testimonials = [
@@ -58,32 +59,17 @@ const bottomTestimonials = [
   }
 ];
 
-const TestimonialCard = ({ testimonial, index, direction }: { 
-  testimonial: typeof testimonials[0], 
-  index: number, 
-  direction: 'left' | 'right' 
+const TestimonialCard = ({ testimonial }: { 
+  testimonial: typeof testimonials[0]
 }) => {
   return (
     <motion.div
-      initial={{ 
-        opacity: 0, 
-        x: direction === 'left' ? -100 : 100 
-      }}
-      whileInView={{ 
-        opacity: 1, 
-        x: 0 
-      }}
-      transition={{ 
-        duration: 0.6, 
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
       whileHover={{ 
         scale: 1.02,
         y: -5,
         transition: { duration: 0.2 }
       }}
-      className="glass-card p-6 rounded-xl border border-white/10 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 group"
+      className="glass-card p-6 rounded-xl border border-white/10 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 group flex-shrink-0 w-80"
     >
       <div className="flex items-start space-x-4">
         <div className="text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -111,6 +97,8 @@ const TestimonialCard = ({ testimonial, index, direction }: {
 };
 
 export const TestimonialsSection = () => {
+  const [isHoveredTop, setIsHoveredTop] = useState(false);
+  const [isHoveredBottom, setIsHoveredBottom] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -134,27 +122,53 @@ export const TestimonialsSection = () => {
         </motion.div>
 
         {/* Upper row - Left to Right animation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={`top-${index}`}
-              testimonial={testimonial}
-              index={index}
-              direction="left"
-            />
-          ))}
+        <div className="overflow-hidden mb-8">
+          <motion.div
+            className="flex gap-6"
+            animate={{
+              x: isHoveredTop ? 0 : [0, -1920]
+            }}
+            transition={{
+              duration: isHoveredTop ? 0 : 20,
+              repeat: isHoveredTop ? 0 : Infinity,
+              ease: "linear"
+            }}
+            onMouseEnter={() => setIsHoveredTop(true)}
+            onMouseLeave={() => setIsHoveredTop(false)}
+          >
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+              <TestimonialCard
+                key={`top-${index}`}
+                testimonial={testimonial}
+              />
+            ))}
+          </motion.div>
         </div>
 
         {/* Bottom row - Right to Left animation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {bottomTestimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={`bottom-${index}`}
-              testimonial={testimonial}
-              index={index}
-              direction="right"
-            />
-          ))}
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex gap-6"
+            animate={{
+              x: isHoveredBottom ? 0 : [0, 1920]
+            }}
+            transition={{
+              duration: isHoveredBottom ? 0 : 20,
+              repeat: isHoveredBottom ? 0 : Infinity,
+              ease: "linear"
+            }}
+            onMouseEnter={() => setIsHoveredBottom(true)}
+            onMouseLeave={() => setIsHoveredBottom(false)}
+            style={{ direction: 'rtl' }}
+          >
+            {[...bottomTestimonials, ...bottomTestimonials].map((testimonial, index) => (
+              <div key={`bottom-${index}`} style={{ direction: 'ltr' }}>
+                <TestimonialCard
+                  testimonial={testimonial}
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
 
         {/* Floating animation background elements */}

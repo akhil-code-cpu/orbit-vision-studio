@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere, Box, Torus } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 function FloatingBox({ position, color, speed = 1 }: { position: [number, number, number], color: string, speed?: number }) {
@@ -15,9 +15,10 @@ function FloatingBox({ position, color, speed = 1 }: { position: [number, number
   });
 
   return (
-    <Box ref={meshRef} position={position} args={[1, 1, 1]}>
+    <mesh ref={meshRef} position={position}>
+      <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={color} />
-    </Box>
+    </mesh>
   );
 }
 
@@ -32,9 +33,10 @@ function FloatingSphere({ position, color, speed = 1 }: { position: [number, num
   });
 
   return (
-    <Sphere ref={meshRef} position={position} args={[0.8, 32, 32]}>
+    <mesh ref={meshRef} position={position}>
+      <sphereGeometry args={[0.8, 32, 32]} />
       <meshStandardMaterial color={color} transparent opacity={0.8} />
-    </Sphere>
+    </mesh>
   );
 }
 
@@ -50,9 +52,10 @@ function FloatingTorus({ position, color, speed = 1 }: { position: [number, numb
   });
 
   return (
-    <Torus ref={meshRef} position={position} args={[1, 0.4, 16, 100]}>
+    <mesh ref={meshRef} position={position}>
+      <torusGeometry args={[1, 0.4, 16, 100]} />
       <meshStandardMaterial color={color} />
-    </Torus>
+    </mesh>
   );
 }
 

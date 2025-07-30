@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Calendar, Users } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Users, Rocket, Star, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Navbar } from '@/components/Layout/Navbar';
+import { Footer } from '@/components/Layout/Footer';
 
 export default function Projects() {
   const projects = [
@@ -90,8 +92,9 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -144,7 +147,7 @@ export default function Projects() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-300 group">
+                <Card className="overflow-hidden glass-card border-border/50 hover:shadow-glow hover:border-primary/20 transition-all duration-500 group hover-scale">
                   <div className="relative overflow-hidden">
                     <img 
                       src={project.image} 
@@ -237,6 +240,8 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

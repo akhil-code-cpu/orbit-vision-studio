@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Clock, Users, DollarSign, Upload, Send, X, Briefcase, CheckCircle } from 'lucide-react';
+import { MapPin, Clock, Users, DollarSign, Upload, Send, X, Briefcase, CheckCircle, Sparkles, Zap, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { Navbar } from '@/components/Layout/Navbar';
+import { Footer } from '@/components/Layout/Footer';
 
 // Job openings data
 const jobOpenings = [
@@ -185,8 +187,9 @@ export default function Career() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -433,12 +436,12 @@ export default function Career() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
-                <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-300">
+                <Card className="p-6 glass-card border-border/50 hover:shadow-glow hover:border-primary/20 transition-all duration-500 group hover-scale">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div className="flex-1">
                       <div className="flex items-start gap-4 mb-4">
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-foreground mb-2">{job.title}</h3>
+                          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{job.title}</h3>
                           <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 mb-3">
                             {job.department}
                           </Badge>
@@ -477,9 +480,15 @@ export default function Career() {
                     <div className="flex-shrink-0">
                       <Button
                         onClick={() => setSelectedJob(job)}
-                        className="bg-gradient-primary hover:opacity-90 text-primary-foreground px-8"
+                        className="bg-gradient-primary hover:opacity-90 text-primary-foreground px-8 group-hover:scale-105 transition-all duration-300"
                       >
-                        Apply Now
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center gap-2"
+                        >
+                          Apply Now
+                          <Sparkles className="w-4 h-4" />
+                        </motion.span>
                       </Button>
                     </div>
                   </div>
@@ -551,6 +560,8 @@ export default function Career() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { Linkedin, Github, Twitter, ArrowRight } from 'lucide-react';
+import { Linkedin, Github, Twitter, ArrowRight, Heart, Coffee, Code } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '@/components/Layout/Navbar';
+import { Footer } from '@/components/Layout/Footer';
 
 export default function Team() {
   const navigate = useNavigate();
@@ -108,8 +110,9 @@ export default function Team() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -139,7 +142,7 @@ export default function Team() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-300 group">
+                <Card className="overflow-hidden glass-card border-border/50 hover:shadow-glow hover:border-primary/20 transition-all duration-500 group hover-scale">
                   <div className="relative overflow-hidden">
                     <img 
                       src={member.image} 
@@ -270,6 +273,8 @@ export default function Team() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

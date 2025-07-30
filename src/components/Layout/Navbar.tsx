@@ -43,55 +43,57 @@ export const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-      }`}
+      className="fixed top-6 left-6 right-6 z-50 transition-all duration-300"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center"
-          >
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">S</span>
-            </div>
-            <span className="ml-3 text-xl font-bold gradient-text">StartupCorp</span>
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.name}
-                onClick={() => {
-                  if (item.href.startsWith('/#')) {
-                    scrollToSection(item.href);
-                  } else {
-                    navigate(item.href);
-                  }
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-foreground hover:text-primary smooth-transition font-medium"
-              >
-                {item.name}
-              </motion.button>
-            ))}
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile menu button and theme toggle */}
-          <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
+      <div className={`glass-card rounded-2xl border border-white/20 backdrop-blur-xl transition-all duration-300 ${
+        scrolled ? 'bg-background/80 shadow-elegant' : 'bg-background/60'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8">
+          <div className="flex justify-between items-center py-4">
+            {/* Logo */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <span className="ml-3 text-xl font-bold gradient-text">StartupCorp</span>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.name}
+                  onClick={() => {
+                    if (item.href.startsWith('/#')) {
+                      scrollToSection(item.href);
+                    } else {
+                      navigate(item.href);
+                    }
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-foreground hover:text-primary smooth-transition font-medium"
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile menu button and theme toggle */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -103,9 +105,9 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 backdrop-blur-lg border-t"
+            className="md:hidden glass-card rounded-b-2xl border-t border-white/20 mt-2 mx-6"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-6 py-6 space-y-4">
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}

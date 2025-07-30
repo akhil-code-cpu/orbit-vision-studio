@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { Users, Target, Award, Lightbulb, ArrowRight } from 'lucide-react';
+import { Users, Target, Award, Lightbulb, ArrowRight, Sparkles, Globe, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '@/components/Layout/Navbar';
+import { Footer } from '@/components/Layout/Footer';
 
 export default function About() {
   const navigate = useNavigate();
@@ -11,22 +13,26 @@ export default function About() {
     {
       icon: <Target className="w-8 h-8" />,
       title: "Mission-Driven",
-      description: "We're committed to delivering exceptional solutions that drive real business value and transform ideas into reality."
+      description: "We're committed to delivering exceptional solutions that drive real business value and transform ideas into reality.",
+      gradient: "from-blue-500 to-purple-600"
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Client-Centric",
-      description: "Our clients' success is our success. We work closely with you every step of the way to ensure your vision becomes reality."
+      description: "Our clients' success is our success. We work closely with you every step of the way to ensure your vision becomes reality.",
+      gradient: "from-green-500 to-teal-600"
     },
     {
       icon: <Award className="w-8 h-8" />,
       title: "Quality Excellence",
-      description: "We maintain the highest standards in everything we do, from code quality to customer service and project delivery."
+      description: "We maintain the highest standards in everything we do, from code quality to customer service and project delivery.",
+      gradient: "from-orange-500 to-red-600"
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: "Innovation First",
-      description: "We stay ahead of the curve with cutting-edge technologies and innovative approaches to solve complex challenges."
+      description: "We stay ahead of the curve with cutting-edge technologies and innovative approaches to solve complex challenges.",
+      gradient: "from-purple-500 to-pink-600"
     }
   ];
 
@@ -39,8 +45,9 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -125,13 +132,42 @@ export default function About() {
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  rotateY: 5,
+                  transition: { duration: 0.3 }
+                }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="p-6 h-full bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-300">
-                  <div className="text-primary mb-4">{value.icon}</div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
+                <Card className="p-6 h-full glass-card border-border/50 hover:shadow-glow hover:border-primary/20 transition-all duration-500 relative overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                  <div className="relative z-10">
+                    <motion.div 
+                      className="text-primary mb-4 group-hover:scale-110 transition-transform duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {value.icon}
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">{value.title}</h3>
+                    <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{value.description}</p>
+                    <motion.div
+                      className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{ 
+                        rotate: [0, 180, 360],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </motion.div>
+                  </div>
                 </Card>
               </motion.div>
             ))}
@@ -165,6 +201,8 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

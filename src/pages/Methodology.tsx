@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
-import { CheckCircle, Users, Target, Repeat, Clock, Shield, Code, TestTube } from 'lucide-react';
+import { CheckCircle, Users, Target, Repeat, Clock, Shield, Code, TestTube, Zap, Star, TrendingUp } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Navbar } from '@/components/Layout/Navbar';
+import { Footer } from '@/components/Layout/Footer';
 
 export default function Methodology() {
   const methodologies = [
@@ -82,8 +84,9 @@ export default function Methodology() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -128,8 +131,14 @@ export default function Methodology() {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="p-8 h-full bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-300">
-                  <div className="text-primary mb-6">{methodology.icon}</div>
+                <Card className="p-8 h-full glass-card border-border/50 hover:shadow-glow hover:border-primary/20 transition-all duration-500 group hover-scale">
+                  <motion.div 
+                    className="text-primary mb-6 group-hover:scale-110 transition-transform duration-300"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {methodology.icon}
+                  </motion.div>
                   <h3 className="text-2xl font-bold text-foreground mb-4">{methodology.title}</h3>
                   <p className="text-muted-foreground mb-6">{methodology.description}</p>
                   
@@ -281,6 +290,8 @@ export default function Methodology() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

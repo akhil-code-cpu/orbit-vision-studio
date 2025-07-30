@@ -27,11 +27,15 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navigate = useNavigate();
+
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
+    if (href.startsWith('/#')) {
+      const element = document.querySelector(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsOpen(false);
+      }
     }
   };
 
@@ -61,7 +65,13 @@ export const Navbar = () => {
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => {
+                  if (item.href.startsWith('/#')) {
+                    scrollToSection(item.href);
+                  } else {
+                    navigate(item.href);
+                  }
+                }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="text-foreground hover:text-primary smooth-transition font-medium"
@@ -69,10 +79,12 @@ export const Navbar = () => {
                 {item.name}
               </motion.button>
             ))}
+            <ThemeToggle />
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button and theme toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="sm"
@@ -97,7 +109,14 @@ export const Navbar = () => {
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => {
+                    if (item.href.startsWith('/#')) {
+                      scrollToSection(item.href);
+                    } else {
+                      navigate(item.href);
+                    }
+                    setIsOpen(false);
+                  }}
                   whileHover={{ x: 10 }}
                   className="block w-full text-left text-foreground hover:text-primary smooth-transition font-medium"
                 >
